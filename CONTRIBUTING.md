@@ -6,7 +6,7 @@ Thanks for your interest in contributing! This project thrives on community inpu
 
 ### Prerequisites
 
-- **Node.js** 18+ ([download](https://nodejs.org/))
+- **Node.js** 22 LTS ([download](https://nodejs.org/); see `.nvmrc`)
 - **Ollama** ([download](https://ollama.com/)) — for text model testing
 - **ComfyUI** (optional) — only needed for image/video gen features
 - **Git** (obviously)
@@ -36,6 +36,32 @@ npm run tauri:build
 
 Most pull requests only need `npm run tauri:dev`. Thanks to a user for
 flagging that these commands weren't spelled out here.
+
+#### Apple silicon desktop build
+
+On an M-series Mac running macOS 14 or later, use a native arm64 terminal.
+Install Xcode Command Line Tools (`xcode-select --install`), CMake
+(`brew install cmake`), Node 22 LTS, and the native Rust stable toolchain
+from [rustup](https://rustup.rs/). Then run:
+
+```bash
+npm ci
+npm run build:mac
+```
+
+This builds the pinned llama.cpp sidecar with Metal, checks that it starts,
+builds an ad hoc signed desktop app and DMG, and verifies the bundle. No Apple
+Developer certificate or upstream signing secret is needed. Find `LU.app` in
+`src-tauri/target/release/bundle/macos/` and the installer in
+`src-tauri/target/release/bundle/dmg/`. Open `LU.app` or drag it to Applications.
+The first build downloads dependencies and compiles both C++ and Rust.
+
+For hot reload after this first build, run `npm run tauri:dev`. The bare
+`npm run tauri:build` command assumes the sidecar already exists; browser mode
+does not provide the native engine. Chat uses Metal; the existing Mac image
+and video engines install their Python environments and models on demand.
+Available models depend on unified memory. This source build is not notarized
+and does not create an upstream Mac release or an automatic update channel.
 
 #### ComfyUI CORS when you run your own instance
 

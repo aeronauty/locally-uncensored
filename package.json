@@ -32,10 +32,12 @@
     "cycles": "madge --circular --extensions ts,tsx src",
     "test": "vitest run",
     "test:security-deps": "node --test scripts/security-dependencies.test.mjs",
+    "test:mac-build": "node --test scripts/build-mac.test.mjs",
     "preview": "vite preview",
     "tauri": "tauri",
     "tauri:dev": "tauri dev",
     "tauri:build": "tauri build",
+    "build:mac": "bash scripts/build-mac.sh",
     "test:e2e": "playwright test"
   },
   "dependencies": {

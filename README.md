@@ -86,6 +86,11 @@ npm run tauri build  # desktop binary
 
 `setup.bat` on Windows and `setup.sh` on Linux and macOS bootstrap Node, Git and Ollama for dev mode. See the [contributing guide](CONTRIBUTING.md).
 
+**Apple silicon source build (macOS 14+):** install the prerequisites in the
+[Mac build guide](CONTRIBUTING.md#apple-silicon-desktop-build), then run
+`npm ci` and `npm run build:mac`. This builds a native `LU.app` and DMG with
+the Metal chat engine; it is an ad hoc signed source build, not an official release.
+
 </details>
 
 ## What is in the box
